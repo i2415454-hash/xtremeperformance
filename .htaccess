@@ -2,10 +2,7 @@
     Options -Multiviews
     RewriteEngine On
     
-    # Si el archivo o carpeta existe físicamente (como un css, js o imagen), lo muestra
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    
-    # Si no existe, manda todo a index.php capturando la url
-    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
