@@ -1,6 +1,6 @@
 <?php
 /**
- * Clase de conexión a base de datos con configuración mejorada
+ * Clase de conexión a base de datos con configuración mejorada para Local y Google Cloud
  */
 require_once(__DIR__ . '/Config.php');
 
@@ -24,10 +24,20 @@ class MySQLdb
         $this->db = Config::get('DB_NAME', 'u645180384_taller');
         $this->puerto = Config::get('DB_PORT', '3306');
         
+        // Capturar el nombre de la instancia de Cloud SQL si está definido en el entorno
+        $instance_connection_name = Config::get('INSTANCE_CONNECTION_NAME', '');
+        
         try {
-            $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db . ';charset=utf8mb4';
-            if (!empty($this->puerto)) {
-                $dsn .= ';port=' . $this->puerto;
+            // Evaluar si se conecta mediante Socket Unix (Google Cloud) o TCP/IP (Local)
+            if (!empty($instance_connection_name)) {
+                // Conexión optimizada para Cloud Run a Cloud SQL
+                $dsn = 'mysql:unix_socket=/cloudsql/' . $instance_connection_name . ';dbname=' . $this->db . ';charset=utf8mb4';
+            } else {
+                // Conexión tradicional para desarrollo local
+                $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db . ';charset=utf8mb4';
+                if (!empty($this->puerto)) {
+                    $dsn .= ';port=' . $this->puerto;
+                }
             }
             
             $this->conn = new PDO(
