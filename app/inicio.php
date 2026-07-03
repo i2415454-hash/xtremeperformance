@@ -5,19 +5,25 @@ define("CLAVE","mimamamemimamucho");
 define('RUTA', '/./');
 define("TAMANO_PAGINA",6);
 define('PAGINAS_MAXIMAS',4);
-// URL absoluta del sitio para enlaces en correos
+
+// URL absoluta detectada dinámicamente desde Cloud Run o entorno local
 if (!defined('SITE_URL')) {
-	define('SITE_URL', 'https://www.xtremeperformancepe.com/');
+    $env_site_url = getenv('SITE_URL');
+    define('SITE_URL', $env_site_url ? $env_site_url : 'https://www.xtremeperformancepe.com/');
 }
-// Config correo básico (usar correos del mismo dominio para mejor entrega)
+
+// Config correo básico priorizando variables de entorno
 if (!defined('MAIL_FROM')) {
-	define('MAIL_FROM', 'no-reply@xtremeperformancepe.com');
+    $env_mail = getenv('MAIL_FROM');
+    define('MAIL_FROM', $env_mail ? $env_mail : 'no-reply@xtremeperformancepe.com');
 }
 if (!defined('MAIL_FROM_NAME')) {
-	define('MAIL_FROM_NAME', 'Xtreme Performance');
+    $env_mail_name = getenv('MAIL_FROM_NAME');
+    define('MAIL_FROM_NAME', $env_mail_name ? $env_mail_name : 'Xtreme Performance');
 }
 if (!defined('MAIL_REPLY_TO')) {
-	define('MAIL_REPLY_TO', 'contacto@xtremeperformancepe.com');
+    $env_reply = getenv('MAIL_REPLY_TO');
+    define('MAIL_REPLY_TO', $env_reply ? $env_reply : 'contacto@xtremeperformancepe.com');
 }
 //
 //Tipos Usuarios
