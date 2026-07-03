@@ -43,18 +43,18 @@ class Config
     {
         self::load();
         
-        // 1. Primero busca si la variable fue cargada desde el .env local
-        if (isset(self::$config[$key])) {
-            return self::$config[$key];
-        }
-        
-        // 2. Si no está en el .env, busca en las variables de entorno del servidor (Cloud Run)
+        // 1. PRIORIDAD: Si la variable existe en el sistema (Cloud Run), usa esa primero
         $env_val = getenv($key);
         if ($env_val !== false) {
             return $env_val;
         }
         
-        // 3. Si no existe en ningún lado, retorna el valor por defecto
+        // 2. Si no existe en el sistema, busca en el archivo .env local
+        if (isset(self::$config[$key])) {
+            return self::$config[$key];
+        }
+        
+        // 3. Si no está en ningún lado, usa el valor por defecto
         return $default;
     }
 
