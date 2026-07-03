@@ -93,7 +93,7 @@ body {
   padding-block: 5rem;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.153), rgba(0, 0, 0, 0.016)),
-    url("../../public/img/header.png");
+    url("/img/header.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -241,7 +241,7 @@ nav {
 .customisation {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../../public/img/customisation.jpg");
+    url("/img/customisation.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -276,7 +276,7 @@ nav {
 .contact {
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../../public/img/contact.jpg");
+    url("/img/contact.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
