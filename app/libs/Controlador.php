@@ -209,7 +209,7 @@ class Controlador
         }
     }
 
-    public function mensaje($titulo='',$subtitulo,$texto,$url,$color,$url2="",$color2="",$texto2="")
+    public function mensaje($subtitulo,$texto,$url,$color,$titulo='',$url2="",$color2="",$texto2="")
     {
         $datos = [
             "titulo" => $titulo,
