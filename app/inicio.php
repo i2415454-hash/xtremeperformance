@@ -7,11 +7,21 @@ define("TAMANO_PAGINA",6);
 define('PAGINAS_MAXIMAS',4);
 
 // URL absoluta detectada dinámicamente desde Cloud Run o entorno local
+// URL absoluta del sitio autodetectada dinámicamente
 if (!defined('SITE_URL')) {
-    $env_site_url = getenv('SITE_URL');
-    define('SITE_URL', $env_site_url ? $env_site_url : 'https://www.xtremeperformancepe.com/');
+    // Intenta leer la variable de entorno primero
+    $env_site_url = getenv('SITE_URL') ?: ($_SERVER['SITE_URL'] ?? ($_ENV['SITE_URL'] ?? null));
+    
+    if ($env_site_url) {
+        define('SITE_URL', $env_site_url);
+    } else {
+        // Si no existe la variable, detecta el protocolo y host actual del navegador
+        $protocolo = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || 
+                     (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ? "https" : "http";
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        define('SITE_URL', $protocolo . "://" . $host . "/");
+    }
 }
-
 // Config correo básico priorizando variables de entorno
 if (!defined('MAIL_FROM')) {
     $env_mail = getenv('MAIL_FROM');
