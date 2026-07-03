@@ -13,27 +13,26 @@ class MySQLdb
     private $puerto;
     private $conn;
 
-    function __construct()
+   function __construct()
     {
-        // Cargar configuración desde .env o usar valores por defecto
+        // Cargar configuración desde .env si existe
         Config::load();
         
-        $this->host = Config::get('DB_HOST', 'localhost');
-        $this->usuario = Config::get('DB_USER', 'u645180384_maxi');
-        $this->clave = Config::get('DB_PASS', 'Maxi.123@123');
-        $this->db = Config::get('DB_NAME', 'u645180384_taller');
-        $this->puerto = Config::get('DB_PORT', '3306');
+        // Buscar variables en el sistema de forma ultra-segura (Cloud Run)
+        $instance_connection_name = getenv('INSTANCE_CONNECTION_NAME') ?: ($_SERVER['INSTANCE_CONNECTION_NAME'] ?? ($_ENV['INSTANCE_CONNECTION_NAME'] ?? ''));
         
-        // Capturar el nombre de la instancia de Cloud SQL si está definido en el entorno
-        $instance_connection_name = Config::get('INSTANCE_CONNECTION_NAME', '');
+        $this->db = getenv('DB_NAME') ?: ($_SERVER['DB_NAME'] ?? ($_ENV['DB_NAME'] ?? Config::get('DB_NAME', 'u645180384_taller')));
+        $this->usuario = getenv('DB_USER') ?: ($_SERVER['DB_USER'] ?? ($_ENV['DB_USER'] ?? Config::get('DB_USER', 'u645180384_maxi')));
+        $this->clave = getenv('DB_PASS') ?: ($_SERVER['DB_PASS'] ?? ($_ENV['DB_PASS'] ?? Config::get('DB_PASS', 'Maxi.123@123')));
+        $this->host = getenv('DB_HOST') ?: ($_SERVER['DB_HOST'] ?? ($_ENV['DB_HOST'] ?? Config::get('DB_HOST', 'localhost')));
+        $this->puerto = getenv('DB_PORT') ?: ($_SERVER['DB_PORT'] ?? ($_ENV['DB_PORT'] ?? Config::get('DB_PORT', '3306')));
         
         try {
-            // Evaluar si se conecta mediante Socket Unix (Google Cloud) o TCP/IP (Local)
+            // Si detecta la instancia de Cloud SQL, se conecta por el Socket Unix
             if (!empty($instance_connection_name)) {
-                // Conexión optimizada para Cloud Run a Cloud SQL
                 $dsn = 'mysql:unix_socket=/cloudsql/' . $instance_connection_name . ';dbname=' . $this->db . ';charset=utf8mb4';
             } else {
-                // Conexión tradicional para desarrollo local
+                // Si no, usa la conexión TCP/IP local estándar
                 $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db . ';charset=utf8mb4';
                 if (!empty($this->puerto)) {
                     $dsn .= ';port=' . $this->puerto;
@@ -53,7 +52,6 @@ class MySQLdb
                 ]
             );
         } catch (Exception $e) {
-            // Log error securely instead of exposing details
             error_log("Database connection failed: " . $e->getMessage());
             die("Error de conexión a la base de datos. Contacte al administrador.");
         }
