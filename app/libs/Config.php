@@ -42,7 +42,20 @@ class Config
     public static function get($key, $default = null)
     {
         self::load();
-        return isset(self::$config[$key]) ? self::$config[$key] : $default;
+        
+        // 1. Primero busca si la variable fue cargada desde el .env local
+        if (isset(self::$config[$key])) {
+            return self::$config[$key];
+        }
+        
+        // 2. Si no está en el .env, busca en las variables de entorno del servidor (Cloud Run)
+        $env_val = getenv($key);
+        if ($env_val !== false) {
+            return $env_val;
+        }
+        
+        // 3. Si no existe en ningún lado, retorna el valor por defecto
+        return $default;
     }
 
     public static function has($key)
