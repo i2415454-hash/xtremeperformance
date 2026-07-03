@@ -3,7 +3,7 @@
 <div class="container-fluid bg-light">
     <div class="row g-0 vh-100 justify-content-center align-items-center">
         <div class="col-lg-4 d-none d-lg-block">
-            <img src="./public/img/footer-shape-1.png" alt="Taller Mecánico Xtreme Performance" class="img-fluid h-100" style="object-fit: cover; object-position: center;">
+            <img src="<?php echo SITE_URL; ?>img/footer-shape-1.png" alt="Taller Mecánico Xtreme Performance" class="img-fluid h-100" style="object-fit: cover; object-position: center;">
         </div>
 
         <div class="col-lg-8 px-4 py-5">
@@ -11,7 +11,7 @@
                 <div class="col-md-9 col-lg-8 col-xl-7">
 
                     <div class="text-center mb-4">
-                        <img src="./public/img/LogoLow.png" alt="Logo Xtreme Performance" style="width: 180px;" class="mb-3">
+                        <img src="<?php echo SITE_URL; ?>img/LogoLow.png" alt="Logo Xtreme Performance" style="width: 180px;" class="mb-3">
                         <h1 class="h3 fw-bold">Acceso al Sistema</h1>
                         <p class="text-muted">Ingresa tus credenciales para continuar.</p>
                     </div>
