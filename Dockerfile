@@ -1,17 +1,23 @@
 FROM php:8.2-apache
 
-# Instalar extensiones de PHP necesarias (ejemplo para MySQL)
+# Instalar extensiones necesarias
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Si tu proyecto usa otras extensiones (como GD, zip, etc.), puedes añadirlas aquí
-
-# Copiar el código del proyecto al directorio web de Apache
+# Copiar el código del proyecto
 COPY . /var/www/html/
 
-# Asegurar los permisos correctos para Apache
-RUN chown -r www-data:www-data /var/www/html
+# --- LA MAGIA SUCEDE AQUÍ ---
+# Cambiamos el DocumentRoot de Apache a la carpeta public
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
-# Habilitar el módulo de reescritura de Apache (útil para frameworks como Laravel o rutas amigables)
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# -----------------------------
+
+# Asegurar permisos
+RUN chown -R www-data:www-data /var/www/html
+
+# Habilitar mod_rewrite de Apache para que funcione el .htaccess
 RUN a2enmod rewrite
 
 EXPOSE 80
