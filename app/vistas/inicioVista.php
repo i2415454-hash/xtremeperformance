@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
-    <link rel="stylesheet" href="../../public/css/styles.css" />
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>css/styles.css" />
     <title>Inicio - Xtreme Performance</title>
   </head>
   <body>
@@ -19,7 +19,7 @@
       <nav>
         <div class="nav__bar">
           <div class="logo nav__logo">
-            <a href="index.html"><img src="../../public/img/logo.png" alt="logo" /></a>
+            <a href="index.html"><img src="<?php echo SITE_URL; ?>img/logo.png" alt="logo" /></a>
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <i class="ri-menu-3-line"></i>
@@ -31,9 +31,9 @@
           <li><a href="#service">SERVICIOS</a></li>
           <li><a href="#client">NUESTROS CLIENTES</a></li>
           
-          <button class="btn"><a href="<?php print RUTA; ?>login">
-  <span class="span">INICIAR SESIÓN</span>
-  </a></button>
+          <button class="btn"><a href="<?php echo SITE_URL; ?>login">
+            <span class="span">INICIAR SESIÓN</span>
+          </a></button>
         </ul>
       </nav>
       <div class="section__container header__container" id="home">
@@ -54,13 +54,13 @@
         <h4>Cuidaremos su coche como lo haría usted.</h4>
       </div>
       <div class="banner__image">
-        <img src="../../public/img/banner.jpg" alt="banner" />
+        <img src="<?php echo SITE_URL; ?>img/banner.jpg" alt="banner" />
       </div>
     </section>
 
     <section class="section__container experience__container" id="about">
       <div class="experience__image">
-        <img src="../../public/img/experience.jpg" alt="experience" />
+        <img src="<?php echo SITE_URL; ?>img/experience.jpg" alt="experience" />
       </div>
       <div class="experience__content">
         <p class="section__subheader">¿QUIENES SOMOS?</p>
@@ -88,7 +88,7 @@
         </p>
         <div class="service__grid">
           <div class="service__card">
-            <img src="../../public/img/planchado.jpg" alt="service" />
+            <img src="<?php echo SITE_URL; ?>img/planchado.jpg" alt="service" />
             <h4>Planchado</h4>
             <p>
               Servicio de planchado especializado para componentes automotrices,
@@ -96,7 +96,7 @@
             </p>
           </div>
           <div class="service__card">
-            <img src="../../public/img/pinturas.jpg" alt="service" />
+            <img src="<?php echo SITE_URL; ?>img/pinturas.jpg" alt="service" />
             <h4>Pintura</h4>
             <p>
               Servicio de pintura automotriz de alta calidad, ofreciendo
@@ -105,7 +105,7 @@
             </p>
           </div>
           <div class="service__card">
-            <img src="../../public/img/traccionamiento.jpg" alt="service" />
+            <img src="<?php echo SITE_URL; ?>img/traccionamiento.jpg" alt="service" />
             <h4>Traccionamiento</h4>
             <p>
               Servicio de traccionamiento especializado para mejorar el
@@ -114,7 +114,7 @@
             </p>
           </div>
           <div class="service__card">
-            <img src="../../public/img/mantenimiento.jpg" alt="service" />
+            <img src="<?php echo SITE_URL; ?>img/mantenimiento.jpg" alt="service" />
             <h4>Mantenimiento</h4>
             <p>
               Servicio de mantenimiento integral para vehículos, garantizando su
@@ -193,7 +193,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <div class="testimonial__card">
-              <img src="../../public/img/avatara-carrusel.jpg" alt="testimonial" />
+              <img src="<?php echo SITE_URL; ?>img/avatara-carrusel.jpg" alt="testimonial" />
               <p>
                 No podía creer lo que veían mis ojos cuando me devolvieron el
                 coche de la servicio. Se veía y conducía como si acabara de
@@ -205,7 +205,7 @@
           </div>
           <div class="swiper-slide">
             <div class="testimonial__card">
-              <img src="../../public/img/testimonial-2.jpg" alt="testimonial" />
+              <img src="<?php echo SITE_URL; ?>img/testimonial-2.jpg" alt="testimonial" />
               <p>
                 He estado trayendo mi coche aquí durante años, y nunca
                 decepcionan. Su atención al detalle y el compromiso con la
@@ -217,7 +217,7 @@
           </div>
           <div class="swiper-slide">
             <div class="testimonial__card">
-              <img src="../../public/img/testimonial-3.jpg" alt="testimonial" />
+              <img src="<?php echo SITE_URL; ?>img/testimonial-3.jpg" alt="testimonial" />
               <p>
                 Como entusiasta de los coches, soy muy exigente con quien toca
                 mi preciada posesión. La experiencia de su equipo y su pasión
@@ -235,7 +235,7 @@
       <div class="section__container footer__container">
         <div class="footer__col">
           <div class="logo footer__logo">
-            <a href="#"><img src="../../public/img/logo.png" alt="logo" /></a>
+            <a href="#"><img src="<?php echo SITE_URL; ?>img/logo.png" alt="logo" /></a>
           </div>
           <p class="section__description">
             Con un rico legado de 10 años, nuestro compromiso con la excelencia
@@ -284,6 +284,6 @@
       Copyright © 2026 Xtreme Performance. Todos los derechos son reservados.
     </div>
 
-    <script src="../../public/js/script.js"></script>
-</body>
+    <script src="<?php echo SITE_URL; ?>js/script.js"></script>
+  </body>
 </html>
